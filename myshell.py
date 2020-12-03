@@ -1,25 +1,17 @@
 import os
-
-os.environ.setdefault("DJANGO_SETTINGS_MODEL", "pizza.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Pizzeria.settings")
 
 import django
-
 django.setup()
 
-from pizza.models import Topic
+from pizza.models import Pizza, Topping
 
-topics = Topic.objects.all()
+pizzas = Pizza.objects.all()
 
-for topic in topics:
-    print('Topic ID:', topic.id, 'Topic:', topic)
+for pizza in pizza:
+    print(pizza.id, pizza)
 
-t = Topic.objects.get(id=1)
-print(t.text)
-print(t.date_added)
+toppings = t.topping_set.all()
 
-
-#Bring all the related entries in to play
-entries = t.entry_set.all()
-
-for entry in entries:
-    print(entry)
+for topping in toppings:
+    print(topping)
