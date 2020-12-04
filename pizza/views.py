@@ -17,7 +17,7 @@ def pizzas(request):
 
     context = {'pizzas':pizzas}
 
-    return render(request, 'pizzas/pizza.html', context)
+    return render(request, 'pizza/pizzas.html', context)
 
 
 def pizza(request, pizza_id):
