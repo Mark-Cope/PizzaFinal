@@ -19,3 +19,7 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ['name']
         labels = {'name':''}
+
+#A form is just like a model EXCEPT it is done by the user
+#We must validate all the information entered to make sure it is not dangerous to our code
+#MODELFORM from Django automatically build a from for us in the data

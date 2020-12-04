@@ -1,0 +1,20 @@
+A templpate defines what a page should look like, then django fills in all the relevant data
+
+the reason we make a templates folder and then add another pizza folder into it is because it allows
+Djongo to follow the pattern set
+
+<p> and </p> represents paragraphs in the html 
+
+When we build a website some things need to be on each page. For this we use a base.html
+Here we set the default that will be used on every page to make things easier
+
+After we have written a base.html we can add it into all the other htmls
+they will now be known as child templates
+
+Each child templpate must have {% base.html %} for Django to register that it is a child templpate
+
+Everything that isnt inherieted from the parent template must be defined by a content block
+it is opened with {% block %} and once it is finished it is closed with {% endblock content %}
+it does not have to have a name at the end but if you have multiple content blocks in one template
+it will help you keep up with which is which
+

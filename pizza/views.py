@@ -5,7 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 
 # Create your views here.
-
+#The VIEW function takes in information from a request then prepares the data
+#needed to generate the page, then sends it back to the browser
+#often this template defines what the page will look like
 def index(request):
     return render(request, 'pizza/index.html')
 
@@ -15,7 +17,7 @@ def pizzas(request):
 
     context = {'pizzas':pizzas}
 
-    return render(request, 'pizza/pizzas.html', context)
+    return render(request, 'pizzas/pizza.html', context)
 
 
 def pizza(request, pizza_id):
@@ -27,7 +29,8 @@ def pizza(request, pizza_id):
     context = {'pizza':pizza, 'toppings':toppings, 'comments':comments}
 
     return render(request, 'pizza/pizza.html', context)
-
+                                                                                                #A GET request only reads the data 
+                                                                                                #a POST request requires a user input through a form
 
 def new_pizza(request):
     if request.method != 'POST':

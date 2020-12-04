@@ -15,3 +15,7 @@ toppings = t.topping_set.all()
 
 for topping in toppings:
     print(topping)
+
+
+#Shell is just an enviorment to trouble shoot and test your project
+#It is an interactive terminal session
