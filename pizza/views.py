@@ -17,7 +17,7 @@ def pizzas(request):
 
     return render(request, 'pizza/pizzas.html', context)
 
-@login_required
+
 def pizza(request, pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
     
@@ -28,7 +28,7 @@ def pizza(request, pizza_id):
 
     return render(request, 'pizza/pizza.html', context)
 
-@login_required
+
 def new_pizza(request):
     if request.method != 'POST':
         form = PizzaForm()
@@ -47,7 +47,7 @@ def new_pizza(request):
     context = {'form':form}
     return render(request, 'pizza/new_pizza.html', context)
 
-@login_required
+
 def new_topping(request, pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
 
@@ -71,7 +71,7 @@ def new_topping(request, pizza_id):
 
     return render(request, 'pizza/new_topping.html', context)
 
-@login_required
+
 def edit_topping(request, topping_id):
     topping = Topping.objects.get(id=topping_id)
     pizza = topping.pizza
@@ -90,7 +90,7 @@ def edit_topping(request, topping_id):
         
     return render(request, 'pizza/edit_.html', context)
 
-@login_required
+
 def new_comment(request, pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
 
