@@ -9,11 +9,11 @@ from django.http import Http404
 def index(request):
     return render(request, 'pizza/index.html')
 
-@login_required
+
 def pizzas(request):
     pizzas = Pizza.objects.order_by('date')
 
-    context = {'pizzas':pizzas}
+    context = {'pizza':pizza}
 
     return render(request, 'pizza/pizza.html', context)
 
@@ -37,8 +37,9 @@ def new_pizza(request):
         form = PizzaForm(data=request.POST)
 
         if form.is_valid():
+
             new_pizza = form.save(commit=False)
-            new_pizza.owner = request.user
+            
             new_pizza.save()
 
             return redirect('pizzas:pizzas')
@@ -57,9 +58,11 @@ def new_topping(request, pizza_id):
         form = ToppingForm(data=request.POST)
 
         if form.is_valid():
+
             new_topping = form.save(commit=False)
+
             new_topping.pizza = pizza
-            new_topping.owner = request.user
+           
             new_topping.save()
 
             return redirect('pizzas:pizza',pizza_id=pizza_id)
@@ -73,8 +76,6 @@ def edit_topping(request, topping_id):
     topping = Topping.objects.get(id=topping_id)
     pizza = topping.pizza
 
-    if pizza.owner != request.user:
-        raise Http404
         
     if request.method != 'POST':
         form = ToppingForm(instance=topping)
@@ -102,7 +103,6 @@ def new_comment(request, pizza_id):
         if form.is_valid():
             new_comment = form.save(commit=False)
             new_comment.pizza = pizza
-            new_comment.owner = request.user
             new_comment.save()
 
             return redirect('pizza:pizza',pizza_id=pizza_id)
