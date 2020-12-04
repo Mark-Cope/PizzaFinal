@@ -7,7 +7,7 @@ from django.http import Http404
 # Create your views here.
 
 def index(request):
-    return render(request, 'pizzas/index.html')
+    return render(request, 'pizza/index.html')
 
 @login_required
 def pizzas(request):
@@ -15,7 +15,7 @@ def pizzas(request):
 
     context = {'pizzas':pizzas}
 
-    return render(request, 'pizzas/pizzas.html', context)
+    return render(request, 'pizza/pizza.html', context)
 
 @login_required
 def pizza(request, pizza_id):
@@ -26,7 +26,7 @@ def pizza(request, pizza_id):
 
     context = {'pizza':pizza, 'toppings':toppings, 'comments':comments}
 
-    return render(request, 'pizzas/pizza.html', context)
+    return render(request, 'pizza/pizza.html', context)
 
 @login_required
 def new_pizza(request):
@@ -44,7 +44,7 @@ def new_pizza(request):
             return redirect('pizzas:pizzas')
 
     context = {'form':form}
-    return render(request, 'pizzas/new_pizza.html', context)
+    return render(request, 'pizza/new_pizza.html', context)
 
 @login_required
 def new_topping(request, pizza_id):
@@ -66,7 +66,7 @@ def new_topping(request, pizza_id):
 
     context = {'form':form, 'pizza':pizza}
 
-    return render(request, 'pizzas/new_topping.html', context)
+    return render(request, 'pizza/new_topping.html', context)
 
 @login_required
 def edit_topping(request, topping_id):
@@ -87,7 +87,7 @@ def edit_topping(request, topping_id):
 
     context = {'topping':topping, 'pizza':pizza, 'form':form}
         
-    return render(request, 'pizzas/edit_.html', context)
+    return render(request, 'pizza/edit_.html', context)
 
 @login_required
 def new_comment(request, pizza_id):
@@ -105,8 +105,8 @@ def new_comment(request, pizza_id):
             new_comment.owner = request.user
             new_comment.save()
 
-            return redirect('pizzas:pizza',pizza_id=pizza_id)
+            return redirect('pizza:pizza',pizza_id=pizza_id)
 
     context = {'form':form, 'pizza':pizza}
 
-    return render(request, 'pizzas/new_comment.html', context)
+    return render(request, 'pizza/new_comment.html', context)

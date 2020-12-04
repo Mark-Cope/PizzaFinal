@@ -1,11 +1,11 @@
-{% extends "pizzas/base.html" %}
+{% extends "pizza/base.html" %}
 
     {% block content %}
 
-        <p><a href="{% url 'pizzas:pizza' pizza.id %}">{{ pizza }}</a></p>
+        <p><a href="{% url 'pizza:pizza' pizza.id %}">{{ pizza }}</a></p>
             <p>Edit topping:</p>
 
-        <form action="{% url 'pizzas:edit_topping' topping.id %}" method='post'>
+        <form action="{% url 'pizza:edit_topping' topping.id %}" method='post'>
             
             {% csrf_token %}
             {{ form.as_p }}
