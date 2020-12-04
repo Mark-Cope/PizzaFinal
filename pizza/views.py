@@ -13,9 +13,9 @@ def index(request):
 def pizzas(request):
     pizzas = Pizza.objects.order_by('date')
 
-    context = {'pizza':pizza}
+    context = {'pizzas':pizzas}
 
-    return render(request, 'pizza/pizza.html', context)
+    return render(request, 'pizza/pizzas.html', context)
 
 @login_required
 def pizza(request, pizza_id):
