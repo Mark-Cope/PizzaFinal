@@ -11,7 +11,7 @@ from django.http import Http404
 def index(request):
     return render(request, 'pizza/index.html')
 
-
+@login_required
 def pizzas(request):
     pizzas = Pizza.objects.order_by('date')
 
@@ -19,7 +19,7 @@ def pizzas(request):
 
     return render(request, 'pizza/pizzas.html', context)
 
-
+@login_required
 def pizza(request, pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
     
@@ -31,7 +31,7 @@ def pizza(request, pizza_id):
     return render(request, 'pizza/pizza.html', context)
                                                                                                 #A GET request only reads the data 
                                                                                                 #a POST request requires a user input through a form
-
+@login_required
 def new_pizza(request):
     if request.method != 'POST':
         form = PizzaForm()
@@ -45,12 +45,12 @@ def new_pizza(request):
             
             new_pizza.save()
 
-            return redirect('pizzas:pizzas')
+            return redirect('pizza:pizza')
 
     context = {'form':form}
     return render(request, 'pizza/new_pizza.html', context)
 
-
+@login_required
 def new_topping(request, pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
 
@@ -68,13 +68,13 @@ def new_topping(request, pizza_id):
            
             new_topping.save()
 
-            return redirect('pizzas:pizza',pizza_id=pizza_id)
+            return redirect('pizza:pizza',pizza_id=pizza_id)
 
     context = {'form':form, 'pizza':pizza}
 
     return render(request, 'pizza/new_topping.html', context)
 
-
+@login_required
 def edit_topping(request, topping_id):
     topping = Topping.objects.get(id=topping_id)
     pizza = topping.pizza
@@ -87,13 +87,13 @@ def edit_topping(request, topping_id):
 
     if form.is_valid():
         form.save()
-        return redirect('pizzas:pizza',pizza_id=pizza.id)
+        return redirect('pizza:pizza',pizza_id=pizza.id)
 
     context = {'topping':topping, 'pizza':pizza, 'form':form}
         
-    return render(request, 'pizza/edit_.html', context)
+    return render(request, 'pizza/edit_topping.html', context)
 
-
+@login_required
 def new_comment(request, pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
 
